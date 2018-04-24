@@ -1,0 +1,1115 @@
+\documentclass[9pt,oneside]{amsart}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{colortbl}
+%\usepackage{multicol}
+
+% command from 9.4.1
+
+\newcommand{\hcancel}[1]{%
+    \tikz[baseline=(tocancel.base)]{
+        \node[inner sep=0pt,outer sep=0pt] (tocancel) {#1};
+        \draw[black] (tocancel.south west) -- (tocancel.north east);
+    }%
+}%
+
+\newcommand{\reff}[1]{{\footnotesize #1}}
+\newcommand{\weakhline}{\arrayrulecolor[gray]{0.9}\hline\arrayrulecolor{black}}
+
+\begin{document}
+
+\noindent
+state transaction functions - (transaction) $\Upsilon$ $\rightarrow$
+ (give rewards) $\Omega$ $\rightarrow$ (block) $\Pi$ \\
+$\boldsymbol{\sigma}$ $\rightarrow$ $\boldsymbol{\sigma}_0$ $\rightarrow$
+ $\boldsymbol{\sigma}_{P}$ $\rightarrow$ $\boldsymbol{\sigma}^*$ $\rightarrow$
+ $\boldsymbol{\sigma}'$ \\
+$\boldsymbol{\sigma}$ $\rightarrow$ $\boldsymbol{\sigma}_1'$ $\rightarrow$
+ $\boldsymbol{\sigma}_1$ $\rightarrow$ $\boldsymbol{\sigma}^{**}$ $\rightarrow$
+ $\boldsymbol{\sigma}'$
+
+\begin{longtabu}{X[1.2lm] X[3] X}
+
+\multicolumn3{c}{Greek Alphabets} \\\hline
+
+$\mathbf{\alpha}$ &
+stack items added &
+\reff{9.4.1, 9.5} \\\hline
+
+$\mathbf{\alpha}_w$ &
+!!! &
+\reff{9.4.2, 9.5} \\\hline
+
+$\Delta$ &
+!!! &
+\reff{\textbf{9.5}} \\\hline
+
+$\mathbf{\delta}$ &
+stack items removed &
+\reff{9.4.1, 9.5} \\\hline
+
+$\delta$ &
+number of stack items for a given operation &
+\reff{3, 9.4.2} \\\hline
+
+$\mathbf{\delta}_w$ &
+!!! &
+\reff{9.4.2, 9.5} \\\hline
+
+$\epsilon$ &
+exponential difficulty symbol for difficulty bomb (or ice age) &
+\reff{\textbf{4.3.4}(4.4.4)} \\\hline
+
+$\Gamma()$ &
+function that maps a block to its initiation state &
+\reff{\textbf{11.4}} \\\hline
+
+$\boldsymbol{\mu}$ &
+machine-state &
+\reff{3, 9.4.0, 9.4.1, 9.4.2, 9.5} \\\hline
+
+$\boldsymbol{\mu}'$ &
+resultant machine state &
+\reff{9.4.0(), 9.5} \\\weakhline
+
+$\boldsymbol{\mu}_{\mathrm{g}}$ &
+!!! &
+\reff{9.4.0, 9.4.2} \\\weakhline
+
+$\boldsymbol{\mu}_{\mathrm{i}}$ &
+!!! &
+\reff{9.4.0} \\\weakhline
+
+$\boldsymbol{\mu}'_{\mathrm{i}}$ &
+!!! &
+\reff{9.5} \\\weakhline
+
+$\boldsymbol{\mu}_{\mathbf{m}}$ &
+machine's memory &
+\reff{3, 9.4.0, 9.4.1} \\\weakhline
+
+$\boldsymbol{\mu}'_{\mathbf{m}}$ &
+!!! &
+\reff{9.5} \\\hline
+
+$\boldsymbol{\mu}_{\mathbf{o}}$ &
+!!! &
+\reff{9.4.0, 9.4.2()} \\\hline
+
+$\boldsymbol{\mu}_{\mathrm{pc}}$ &
+!!! ($\mathbb{N}_{256}$) &
+\reff{9.4.0, 9.4.1, 9.5} \\\hline
+
+$\boldsymbol{\mu}'_{\mathrm{pc}}$ &
+!!! &
+\reff{9.5} \\\hline
+
+$\boldsymbol{\mu}_{\mathbf{s}}$ &
+machine's stack &
+\reff{3, 9.4.0, 9.4.2, 9.5} \\\hline
+
+$\boldsymbol{\mu}'_{\mathbf{s}}$ &
+!!! &
+\reff{9.5} \\\hline
+
+$\boldsymbol{\mu}_{\mathrm{g}}$ &
+!!! &
+\reff{9.4.0()} \\\hline
+
+$\boldsymbol{\mu}'_{\mathrm{g}}$ &
+remaining gas from the resultant machine state ($\boldsymbol{\mu}'$) &
+\reff{9.4.0()} \\\hline
+
+$\Lambda$ &
+!!! &
+\reff{(6.2), 7} \\\hline
+
+$\Lambda_{4}$ &
+!!! &
+\reff{6.2()} \\\hline
+
+$\Omega()$ &
+block-finalisation state transition function that gives rewards &
+\reff{2.0, 11.3, 11.4} \\\hline
+
+$\Pi()$ &
+block-level state transition function &
+\reff{2.0, 4.3.2(4.4.2), 11.4} \\\hline
+
+$\Phi$ &
+block transition function which maps an incomplete block to a complete block &
+\reff{\textbf{11.4}} \\\hline
+
+$\boldsymbol{\sigma}, \boldsymbol{\sigma}_{t}$ &
+world-state, global state, sequence of accounts &
+\reff{2.0, 3, 4.3.2(4.4.2), 6.0, 7, 8, 9.3, 9.4.0, 9.4.2, 9.5, 11.3, 11.4} \\\hline
+
+$\boldsymbol{\sigma}'$ &
+final (post-transactional) state &
+\reff{6.0, 6.2, 7, 8, 9.3, 9.4.0(), 9.5, 11.3} \\\hline
+
+$\boldsymbol{\sigma}^*$ &
+pre-final state &
+\reff{\textbf{6.2}, \textbf{7}} \\\hline
+
+$\boldsymbol{\sigma}^{**}$ &
+resultant state &
+\reff{7, 8} \\\hline
+
+$\boldsymbol{\sigma}_0$ &
+checkpoint state &
+\reff{\textbf{6.2}, 11.4} \\\hline
+
+$\boldsymbol{\sigma}_1$ &
+first transitional state &
+\reff{8} \\\hline
+
+$\boldsymbol{\sigma}_1'$ &
+!!! &
+\reff{8} \\\hline
+
+$\boldsymbol{\sigma}_{\mathrm{i}}$ &
+!!! &
+\reff{11.4} \\\hline
+
+$\boldsymbol{\sigma}_{P}$ &
+tuple of post-execution provisional state &
+\reff{\textbf{6.2}} \\\hline
+
+$\boldsymbol{\sigma}[a]$ &
+account state &
+\reff{4.1, 6.2, 11.3(), 11.4()} \\\hline
+
+$\boldsymbol{\sigma}[a]_{\mathrm{b}}$ &
+balance, number of Wei owned by this address ($\mathbb{N}_{256}$) &
+\reff{4.1, 6.2, 7, 8, 11.3} \\\hline
+
+$\boldsymbol{\sigma}[a]_{\mathrm{c}}$ &
+codeHash, hash of the EVM code of this address ($\mathbb{N}_{32}$) &
+\reff{4.1, 7, 8, 11.3()} \\\hline
+
+$\boldsymbol{\sigma}[a]_{\mathrm{n}}$ &
+nonce, (non-contract account) number of transactions sent from this address or (contract account) number of contract-creations made by this accout ($\mathbb{N}_{256}$) &
+\reff{4.1, 6.2, 7, 8(), 11.3()} \\\hline
+
+$\boldsymbol{\sigma}[a]_{\mathrm{s}}$ &
+storageRoot, root node hash of a Merkle Patricia tree that encodes the storage contents of this accout ($\mathbb{N}_{32}$) &
+\reff{4.1, 7(), 8(), 11.3()} \\\hline
+
+$\varsigma_1$ &
+pre-Homestead difficulty parameter &
+\reff{(4.4.4)} \\\hline
+
+$\varsigma_2$ &
+Homestead difficulty parameter &
+\reff{4.3.4(4.4.4)} \\\hline
+
+$\Theta$ &
+!!! &
+\reff{8} \\\hline
+
+$\Theta_{3}$ &
+!!! &
+\reff{(6.2)} \\\hline
+
+$\Theta_{4}$ &
+!!! &
+\reff{6.2()} \\\hline
+
+$\Upsilon$ &
+transaction-level state transition function &
+\reff{2.0, 3, 6.0, 11.4} \\\hline
+
+$\Upsilon^{\mathrm{g}}()$ &
+total gas used in the execution of a transaction &
+\reff{6.0, 6.2, 11.4} \\\hline
+
+$\Upsilon^{\mathbf{l}}()$ &
+log items created by this transaction &
+\reff{6.0, 6.2, 11.4} \\\hline
+
+$\Upsilon^{\mathrm{z}}()$ &
+status code resulting from the transaction &
+\reff{6.0(), 6.2(), 11.4()} \\\hline
+
+$\Xi(), \Xi_{\mathtt{...}}()$ &
+code execution function &
+\reff{7, 8, 9.3, 9.4.0} \\
+
+\\
+\multicolumn3{c}{Mathematical Symbols} \\\hline
+
+$\equiv$ &
+defined to be &
+... \\\hline
+
+$\lVert ... \rVert$ &
+sequence length &
+... \\\hline
+
+$| ... |$ &
+size of the code &
+\reff{7} \\\hline
+
+$\wedge$ &
+and &
+... \\\hline
+
+$\vee$ &
+or &
+... \\\hline
+
+$\bigvee$ &
+bitwise or &
+\reff{4.3.1(4.4.1), 4.3.2(4.4.2)} \\\hline
+
+$()$ &
+empty string &
+\reff{4.1, 6.1, 7, 9.4.0, 9.4.4} \\\hline
+
+$\varnothing$ &
+empty set &
+... \\\hline
+
+$\top$ &
+!!! &
+\reff{6.2()} \\\hline
+
+$\neg$ &
+not &
+\reff{9.4.2()} \\
+
+\\
+\multicolumn3{c}{Latin Alphabets} \\\hline
+
+% AA
+$A$ &
+transaction substate &
+\reff{6.1, 6.2, 7, 8, 9.3(), 9.4.0, 9.5} \\\hline
+
+$A'$ &
+!!! &
+\reff{9.5} \\\hline
+
+$A^0$ &
+empty substate &
+\reff{\textbf{6.1}, 9.4.0} \\\hline
+
+$A_{\mathbf{l}}$ &
+log series, series of archived and indexable 'checkpoints' &
+\reff{6.1} \\\hline
+
+$A_{\mathrm{r}}$ &
+refund balance which increases through using the {\small SSTORE} instruction in order to reset contract storage &
+\reff{6.1, 6.2} \\\hline
+
+$A_{\mathbf{s}}$ &
+self-destruct (suicide) set: a set of accounts that will be discarded &
+\reff{6.1, 6.2} \\\hline
+
+$A_{\mathbf{t}}$ &
+set of touched empty accounts which are deleted at the end of a transaction &
+\reff{6.1(), 6.2()} \\\hline
+
+$a$ &
+address of the new account &
+\reff{7} \\\hline
+
+$\mathbf{a}'$ &
+!!! &
+\reff{11.3()} \\\hline
+
+$\mathbf{a}^*$ &
+updated contract creation sender (see also $s$) &
+\reff{7} \\\hline
+
+$\mathbf{a}_1$ &
+!!! &
+\reff{8()} \\\hline
+
+$\mathbf{a}_1'$ &
+!!! &
+\reff{8()} \\\hline
+
+$\mathbf{a}_1$ &
+!!! &
+\reff{8()} \\\hline
+
+$\mathbf{a}_1'$ &
+!!! &
+\reff{8()} \\\hline
+
+{\small ADD} &
+!!! &
+\reff{9.4.1} \\\hline
+
+% BB
+$B$ &
+this block &
+\reff{2.0, 4.3.0(4.4.0), 4.3.2(4.4.2), 4.3.3(4.4.3), 6.2, 10, 11.3, 11.4} \\\hline
+
+$B_{H}$ &
+block header (see $H$) &
+\reff{4.3.0(4.4.0), 4.3.3(4.4.3), 4.3.4(4.4.4), 11.1} \\\hline
+
+${B_{H}}_{\mathrm{c}}$ &
+beneficiary ($H_{\mathrm{c}}$) &
+\reff{6.2} \\\hline
+
+$B_{\mathrm{d}}$ &
+block's difficulty &
+\reff{10} \\\hline
+
+${\mathbf{B}_{H}}_{\mathrm{c}}$ &
+!!! &
+\reff{11.3} \\\hline
+
+${B_{H}}_{\mathrm{g}}$ &
+total gas used in the block ($H_{\mathrm{g}}$) &
+\reff{11.2} \\\hline
+
+${B_{H}}_{\mathrm{i}}$ &
+!!! ($H_{\mathrm{i}}$) &
+\reff{11.3} \\\hline
+
+${B_{H}}_{\mathrm{l}}$ &
+block's gasLimit ($H_{\mathrm{l}}$) &
+\reff{6.2} \\\hline
+
+$B_{\mathbf{R}}$ &
+transaction receipts in this block &
+\reff{4.3.1(4.4.1), 4.3.2(4.4.2), 6.2} \\\hline
+
+$B_{\mathbf{T}}$ &
+a series of the transactions in this block &
+\reff{4.3.0(4.4.0), 4.3.2(4.4.2), 4.3.3(4.4.3), 11.4} \\\hline
+
+$B_{\mathrm{t}}$ &
+total difficulty of block &
+\reff{10} \\\hline
+
+$B'_{\mathrm{t}}$ &
+total difficulty of the parent block &
+\reff{10} \\\hline
+
+$B_{\mathbf{U}}$ &
+list of ommer (uncle) block headers &
+\reff{4.3.0(4.4.0), 4.3.2(4.4.2), 4.3.3(4.4.3), 4.3.4(4.4.4), 11.1, 11.3} \\\hline
+
+$B'$ &
+parent block &
+\reff{\textbf{10}} \\\hline
+
+$B'$ &
+!!! complete block &
+\reff{11.4} \\\hline
+
+$B'_{\mathrm{n}}$ &
+!!! &
+\reff{11.4} \\\hline
+
+$B'_{\mathrm{m}}$ &
+!!! &
+\reff{11.4} \\\hline
+
+$B^*$ &
+!!! &
+\reff{11.4} \\\hline
+
+$B^*_{\hcancel{n}}$ &
+!!! &
+\reff{11.4} \\\hline
+
+$B^*_{\mathrm{r}}$ &
+!!! &
+\reff{11.4} \\\hline
+
+$\mathbb{B}, \mathbb{B}_{number}$ &
+byte sequence, of length $number$ &
+\reff{3, 4.1, 4.2(4.3), 4.3.1(4.4.1), 4.3.3(4.4.3)} \\\hline
+
+$\mathcal{B}_{\mathrm{j}}(), \mathcal{B}_{a..b}()$ &
+bit of index $j$ or bits of indices in the range $[a, b]$ in the byte array &
+\reff{\textbf{4.3.1}(4.4.1), 7} \\\hline
+
+$\mathbf{b}$ &
+EVM code &
+\reff{4.1} \\\hline
+
+{\small BLOCKHASH} &
+!!! &
+\reff{12.2} \\\hline
+
+$C, C_\text{OPERATION}$ &
+cost function &
+\reff{3, 9.4.1} \\\hline
+
+$C()$ &
+!!! &
+\reff{9.4.0, 9.4.2, 9.5} \\\hline
+
+$\mathbf{c}$ &
+!!! &
+\reff{9.4.3} \\\hline
+
+$c$ &
+code-deposit cost &
+\reff{\textbf{7}} \\\hline
+
+$c$ &
+account whose code is to be executed (the same as message call recipient) &
+\reff{8} \\\hline
+
+{\small CALL} &
+!!! &
+\reff{9.2, 9.3, 9.4.2()} \\\hline
+
+{\small CALLCODE} &
+!!! &
+\reff{9.2, 9.4.2()} \\\hline
+
+{\small CREATE} &
+!!! &
+\reff{9.2, 9.3, 9.4.2()} \\\hline
+
+$D()$ &
+canonical difficulty of a block of the given header (see $H_{\mathrm{d}}$) &
+\reff{\textbf{4.3.4}(4.4.4)} \\\hline
+
+$D()$ &
+function to determine the set of valid jump destinations given the code that is being run &
+\reff{9.4.2, \textbf{9.4.3}} \\\hline
+
+$D_{J}()$ &
+!!! &
+\reff{\textbf{9.4.3}} \\\hline
+
+$D_0$ &
+difficulty of the genesis block &
+\reff{\textbf{4.3.4}(4.4.4)} \\\hline
+
+\DH{} &
+Ether, {\small ETH} &
+\reff{2.1} \\\hline
+
+$\mathbf{d}$ &
+current DAG for computing the mix-hash &
+\reff{4.3.4(4.4.4), 11.4, 11.5.0} \\\hline
+
+$\mathbf{d}$ &
+input data of the call &
+\reff{8} \\\hline
+
+$\mathtt{\tiny DEAD}()$ &
+whether an account is dead, when its account state is non-existent or empty ($\mathtt{\tiny EMPTY}()$) &
+\reff{(\textbf{4.1}, 6.2, 7)} \\\hline
+
+{\small DELEGATECALL} &
+!!! &
+\reff{8} \\\hline
+
+$e$ &
+present depth of the message-call/contract-creation stack &
+\reff{7, 8} \\\hline
+
+$\mathtt{\tiny EMPTY}()$ &
+whether an account is empty, when it has no code, zero nonce and zero balance &
+\reff{(\textbf{4.1})} \\\hline
+
+$F$ &
+out-of-gas exception condition &
+\reff{(7)} \\\hline
+
+$G_{\mathrm{...}}$ &
+specific gas cost &
+\reff{6.2} \\\hline
+
+$g$ &
+!!! ($\boldsymbol{\mu}_{\mathrm{g}}$) &
+\reff{9.4.1} \\\hline
+
+$g$ &
+amount of gas remaining after deducting the basic amount, $T_{\mathrm{g}} - g_0$ &
+\reff{\textbf{6.2}, 7, 8, 9.3, 9.4.0} \\\hline
+
+$g'$ &
+remaining gas &
+\reff{6.2, \textbf{7}, 8, 9.3} \\\hline
+
+$g^*$ &
+amount of gas to be refunded &
+\reff{\textbf{6.2}} \\\hline
+
+$g^{**}$ &
+available gas remaining &
+\reff{7} \\\hline
+
+$g_0$ &
+intrinsic gas, the amount of gas this transaction requires to be paid prior to execution &
+\reff{\textbf{6.2}} \\\hline
+
+% HH
+$H()$ &
+function which specifies the output data of the instruction if and only if the present state is a normal halting state of the machine (cf. $Z()$) &
+\reff{9.4.0, 9.4.1, 9.4.4} \\\hline
+
+$H$ &
+block header &
+\reff{4.3.0(4.4.0), 4.3.3(4.4.3), 4.3.4(4.4.4), 11.5.0} \\\hline
+
+$H_{\mathrm{b}}$ &
+logsBloom, Bloom filter for each log entry from the each transaction receipt &
+\reff{4.3.0(4.4.0), 4.3.2(4.4.2), 4.3.3(4.4.3)} \\\hline
+
+$H_{\mathrm{c}}$ &
+beneficiary, address to which all fees collected be transferred &
+\reff{4.3.0(4.4.0), 4.3.3(4.4.3), 11.3} \\\hline
+
+$H_{\mathrm{d}}$ &
+difficulty, difficulty level of this block &
+\reff{4.3.0(4.4.0), 4.3.3(4.4.3), 4.3.4(4.4.4), 11.4, 11.5.0} \\\hline
+
+$H_{\mathrm{e}}$ &
+receiptRoot, root node hash of each transaction receipt &
+\reff{4.3.0(4.4.0), 4.3.1(4.4.1), 4.3.2(4.4.2), 4.3.3(4.4.3)} \\\hline
+
+$H_{\mathrm{g}}$ &
+gasUsed, total gas used in transactions in this block &
+\reff{4.3.0(4.4.0), 4.3.3(4.4.3), 4.3.4(4.4.4)} \\\hline
+
+$H_{\mathrm{i}}$ &
+number, number of ancestor blocks, block number &
+\reff{4.3.0(4.4.0), 4.3.3(4.4.3), 4.3.4(4.4.4), (6.2), (7), 11.3} \\\hline
+
+$H'_{\mathrm{i}}$ &
+fake block number to delay the ice age &
+\reff{(\textbf{4.3.4})} \\\hline
+
+$H_{\mathrm{l}}$ &
+gasLimit, current limit of gas expenditure per block &
+\reff{4.3.0(4.4.0), 4.3.3(4.4.3), 4.3.4(4.4.4)} \\\hline
+
+$H_{\mathrm{m}}$ &
+mixHash, hash which proves a sufficient amount of computation &
+\reff{4.3.0(4.4.0), 4.3.3(4.4.3), 4.3.4(4.4.4), 11.5.0} \\\hline
+
+$H_{\mathrm{n}}$ &
+nonce, value which proves a sufficient amount of computation &
+\reff{4.3.0(4.4.0), 4.3.3(4.4.3), 4.3.4(4.4.4), 11.5.0} \\\hline
+
+$H_{\hcancel{n}}$ &
+block's header without the nonce ($H_{\mathrm{n}}$) and mix-hash ($H_{\mathrm{m}}$) components &
+\reff{4.3.4(4.4.4), 11.5.0} \\\hline
+
+$H_{\mathrm{o}}$ &
+ommersHash, hash of the ommers (uncles) list &
+\reff{4.3.0(4.4.0), 4.3.2(4.4.2), 4.3.3(4.4.3)} \\\hline
+
+$H_{\mathrm{p}}$ &
+parentHash, hash of the parent block's header &
+\reff{4.3.0(4.4.0), 4.3.3(4.4.3), 4.3.4(4.4.4)} \\\hline
+
+$H_{\mathrm{r}}$ &
+stateRoot, root node hash of the state trie &
+\reff{4.3.0(4.4.0), 4.3.2(4.4.2), 4.3.3(4.4.3), 11.4} \\\hline
+
+$H_{\mathrm{s}}$ &
+timstamp, block creation time in seconds &
+\reff{4.3.0(4.4.0), 4.3.3(4.4.3), 4.3.4(4.4.4)} \\\hline
+
+$H_{\mathrm{t}}$ &
+transactionsRoot, root node hash of each transaction &
+\reff{4.3.0(4.4.0), 4.3.2(4.4.2), 4.3.3(4.4.3)} \\\hline
+
+$H_{\mathrm{x}}$ &
+extraData, arbitrary data relevant to this block &
+\reff{4.3.0(4.4.0), 4.3.3(4.4.3), 4.3.4(4.4.4)} \\\hline
+
+$H_{\text{\tiny RETURN}}$ &
+special function for {\small RETURN} and {\small REVERT} &
+\reff{9.4.4} \\\hline
+
+% II
+$I$ &
+parameters of the execution environment &
+\reff{7, 8, 9.3, 9.4.0, 9.4.2, 9.5} \\\hline
+
+$I_{\mathrm{a}}$ &
+address of the account which owns the code that is executing ($a$) &
+\reff{7, 8, 9.3} \\\hline
+
+$I_{\mathbf{b}}$ &
+byte array that is the machine code to be executed ($\mathbf{i}$) &
+\reff{7, 8, 9.3, 9.4.1, 9.4.2} \\\hline
+
+$I_{\mathbf{d}}$ &
+!!! empty tuple as there is no input data to this call ($()$), byte array that is the input data to this execution; if the execution agent is a transaction, this would be the transaction data &
+\reff{7, 8, 9.3} \\\hline
+
+$I_{\mathrm{e}}$ &
+depth of the present message-call or contract-creation ($e$) &
+\reff{7, 8, 9.3} \\\hline
+
+$I_{H}$ &
+block header of the present block &
+\reff{7, 9.3} \\\hline
+
+$I_{\mathrm{o}}$ &
+sender address of the transaction that originated this execution ($o$) &
+\reff{7, 8, 9.3} \\\hline
+
+$I_{\mathrm{p}}$ &
+price of gas in the transaction that originated this execution ($p$) &
+\reff{7, 8, 9.3} \\\hline
+
+$I_{\mathrm{s}}$ &
+address of the account which caused the code to be executing; if the execution agent is a transaction, this would be transaction sender ($s$) &
+\reff{7, 8, 9.3} \\\hline
+
+$I_{\mathrm{v}}$ &
+value in Wei passed to this account as part of the same procedure as execution ($v$) &
+\reff{7, 8, 9.3} \\\hline
+
+$I_{\mathrm{w}}$ &
+permission to make modifications to the state ($w$) &
+\reff{(7, 8, 9.3, 9.4.2)} \\\hline
+
+$I'$ &
+dropped fourth element from $X()$ &
+\reff{9.4.0()} \\\hline
+
+$\mathbf{i}$ &
+initialisation EVM code for creating a contract &
+\reff{7} \\\hline
+
+$i$ &
+!!! ($\boldsymbol{\mu}_{\mathrm{i}}$) &
+\reff{9.4.1} \\\hline
+
+$J, J_{\text{JUMP}}, J_{\text{JUMPI}}$ &
+!!! &
+\reff{9.5} \\\hline
+
+$J_{cacheinit}, J_{datasetinit}, J_{epoch}$ &
+!!! &
+\reff{11.5.1} \\\hline
+
+{\small JUMP} &
+!!! &
+\reff{9.4.2} \\\hline
+
+{\small JUMPDEST} &
+!!! &
+\reff{9.4.3} \\\hline
+
+{\small JUMPI} &
+!!! &
+\reff{9.4.2} \\\hline
+
+$k()$ &
+check ``is-kin'' property &
+\reff{11.1} \\\hline
+
+$\mathtt{\small KEC}()$ &
+Keccak-256 hash function, plain Keccak &
+\reff{3, 4.1, 4.3.1(4.4.1), 4.3.2(4.4.2), 4.3.4(4.4.4), 7, 8} \\\hline
+
+$\mathtt{\small KEC512}()$ &
+Keccak 512 hash function &
+\reff{3} \\\hline
+
+$L_{B}()$ &
+preparation function for a block &
+\reff{4.3.3(4.4.3)} \\\hline
+
+$L_{H}()$ &
+preparation function for a block header &
+\reff{4.3.3(4.4.3)} \\\hline
+
+$L_{H}^*()$ &
+!!! &
+\reff{4.3.2(4.4.2), 4.3.3(4.4.3)} \\\hline
+
+$L_{I}()$ &
+collapse function for a key/value pair in the trie, $L_{I}\big( (k, v) \big) \equiv \big(\texttt{\small KEC}(k), \texttt{\small RLP}(v)\big)$ &
+\reff{4.1} \\\hline
+
+$L_{I}^*()$ &
+element-wise transformation of $L_{I}$ (see $\boldsymbol{\sigma}[a]_{\mathbf{s}}$) &
+\reff{4.1} \\\hline
+
+$L_{R}()$ &
+function that converts a transaction receipt into an RLP-serialised byte array &
+\reff{4.3.1(4.4.1), 4.3.2(4.4.2)} \\\hline
+
+$L_{S}()$ &
+world-state collapse function &
+\reff{4.1, (4.4.1), 4.3.2(4.4.2), 11.4} \\\hline
+
+$L_{T}()$ &
+!!! &
+\reff{4.2(4.3), 4.3.2(4.4.2)} \\\hline
+
+$L_{T}^*()$ &
+!!! &
+\reff{4.3.3(4.4.3)} \\\hline
+
+$\mathbf{l}$ &
+log series ($A_{\mathbf{l}}$) &
+\reff{9.3} \\\hline
+
+$\ell()$ &
+last item in the sequence &
+\reff{\textbf{3}, 11.2, 11.4} \\\hline
+
+{\small LOG0} &
+!!! &
+\reff{9.4.2()} \\\hline
+
+{\small LOG4} &
+!!! &
+\reff{9.4.2()} \\\hline
+
+$M()$ &
+Bloom filter function to reduce a log entry into a single 256-byte hash &
+\reff{4.3.1(4.4.1)} \\\hline
+
+$M_{3:2048}()$ &
+specialised Bloom filter that sets three bits out of 2048 &
+\reff{\textbf{4.3.1}(4.4.1)} \\\hline
+
+$\mathbf{m}$ &
+!!! ($\boldsymbol{\mu}_{\mathbf{m}}$) &
+\reff{9.4.1} \\\hline
+
+$m$ &
+beneficiary (miner, $H_{\mathrm{c}}$) &
+\reff{\textbf{6.2}} \\\hline
+
+$m()$ &
+fetch the given index after hashing &
+\reff{\textbf{4.3.1}(4.4.1)} \\\hline
+
+% NN
+$N()$ &
+next valid instruction position in the code &
+\reff{9.4.3, 9.5} \\\hline
+
+$\mathbb{N}, \mathbb{N}_{number}$ &
+positive integer, smaller than $2^{number}$ &
+\reff{3(), 4.1() \textbf{4.2}(), 4.3.1(), 4.3.3()} \\\hline
+
+$N_H$ &
+block number between the Frontier and Homestead phases ($1,150,000$) &
+\reff{(\textbf{4.2}), 4.3.4(4.4.4), (6.2), (7)} \\\hline
+
+$n$ &
+transaction nonce (see $T_{\mathrm{n}}$) &
+\reff{3} \\\hline
+
+$O()$ &
+iterator function which defines the result of a single cycle of the state machine &
+\reff{9.4.0, 9.4.1, 9.5} \\\hline
+
+$O, O_{number}$ &
+log entry created through execution of the transaction (see $R_{\mathbf{l}}$) &
+\reff{4.3.1(4.4.1)} \\\hline
+
+$O_{\mathrm{a}}$ &
+logger's address ($\mathbb{B}_{20}$) &
+\reff{4.3.1(4.4.1)} \\\hline
+
+$O_{\mathbf{d}}$ &
+number of bytes of data ($\mathbb{B}$) &
+\reff{4.3.1(4.4.1)} \\\hline
+
+$O_{\mathbf{t}}$ &
+series of log topics &
+\reff{4.3.1(4.4.1)} \\\hline
+
+${O_{\mathbf{t}}}_{number}$ &
+log topic ($\mathbb{B}_{32}$) &
+\reff{4.3.1(4.4.1)} \\\hline
+
+$\mathbf{o}$ &
+output data of a message call or created contract's code (the resultant byte sequence from the execution of the initialisation code) &
+\reff{3, 7(), 8, 9.3} \\\hline
+
+$o$ &
+(contract creation or transaction) originator (see also $T_{\mathrm{o}}$) &
+\reff{7, 8} \\\hline
+
+% PP
+$\mathbb{P}, \mathbb{P}_{number}$ &
+positive integer, smaller than $2^{number}$ &
+\reff{(3, 4.1, \textbf{4.3}, 4.4.1, 4.4.3)} \\\hline
+
+$P(B_H), P(H)$ &
+parent block of $B$ (see $H_{\mathrm{p}}$) &
+\reff{4.3.2(4.4.2), \textbf{4.3.4}(4.4.4), 10, 11.1, 11.4} \\\hline
+
+$p$ &
+(contract creation or message call) gas price &
+\reff{7, 8} \\\hline
+
+$p()$ &
+per-account collapse function (see $L_{S}()$) &
+\reff{4.1} \\\hline
+
+$p()$ &
+pairwise RLP transformation &
+\reff{4.3.2(4.4.2)} \\\hline
+
+$pc$ &
+!!! ($\boldsymbol{\mu}_{\mathrm{pc}}$) &
+\reff{9.4.1} \\\hline
+
+$\mathtt{PoW}$ &
+proof-of-work function &
+\reff{4.3.4(4.4.4), 11.5.0} \\\hline
+
+{\small PUSH1} &
+!!! &
+\reff{9.4.3} \\\hline
+
+{\small PUSH32} &
+!!! &
+\reff{9.4.3} \\\hline
+
+% RR
+$\mathbf{R}$ &
+!!! &
+\reff{11.2} \\\hline
+
+$R$ &
+transaction receipt &
+\reff{4.3.1(4.4.1)} \\\hline
+
+$R$ &
+!!! &
+\reff{11.3()} \\\hline
+
+$R_{\boldsymbol{\sigma}}$ &
+post-transaction state &
+\reff{(4.4.1, 11.4)} \\\hline
+
+$\mathbf{R}[n]_{\boldsymbol{\sigma}}$ &
+!!! ($\boldsymbol{\sigma}[n]$) &
+\reff{(11.4)} \\\hline
+
+$R_{\mathrm{b}}$ &
+Bloom filter composed from information in those logs ($\mathbb{B}_{256}$) &
+\reff{4.3.1(4.4.1), 11.4} \\\hline
+
+$R_b$ &
+!!! &
+\reff{(11.3)} \\\hline
+
+$R_{\mathrm{block}}$ &
+block's beneficiary account &
+\reff{11.3()} \\\hline
+
+$R_{\mathbf{l}}$ &
+a series of log entries ($O$) created through execution of the transaction &
+\reff{4.3.1(4.4.1), 11.4} \\\hline
+
+$R_{\mathrm{u}}$ &
+cumulative gas used immediately after the transaction has happended ($\mathbb{N}$) &
+\reff{4.3.1(4.4.1), 11.2, 11.4} \\\hline
+
+$R_{\mathrm{z}}$ &
+status code of the transaction ($\mathbb{N}$) &
+\reff{4.3.1(), 11.4()} \\\hline
+
+$r$ &
+message call recipient &
+\reff{8} \\\hline
+
+$r$ &
+refunds ($A_{\mathrm{r}}$) &
+\reff{9.3} \\\hline
+
+$r()$ &
+!!! &
+\reff{11.4} \\\hline
+
+$\mathbf{r}_{\mathrm{b}}$ &
+Bloom filter of a receipt (see $O$) &
+\reff{4.3.2(4.4.2)} \\\hline
+
+{\small RETURN} &
+!!! &
+\reff{9.4.4} \\\hline
+
+{\small RETURNDATACOPY} &
+!!! &
+\reff{9.4.2()} \\\hline
+
+{\small REVERT} &
+!!! &
+\reff{9.4.0(), 9.4.4()} \\\hline
+
+$\texttt{RLP}()$ &
+!!! RLP transformation &
+\reff{4.1, 4.3.2(4.4.2), 4.3.3(4.4.3), 4.3.4(4.4.4), 7} \\\hline
+
+$S(T)$ &
+transaction sender &
+\reff{4.2(4.3), 6.2} \\\hline
+
+$\mathbf{s}$ &
+suicides set ($A_{\mathbf{s}}$) &
+\reff{9.3} \\\hline
+
+$\mathbf{s}$ &
+!!! ($\boldsymbol{\mu}_{\mathbf{s}}$) &
+\reff{9.4.1} \\\hline
+
+$s$ &
+(contract creation or message call) sender &
+\reff{7, 8} \\\hline
+
+$s()$ &
+check ``is-sibling'' property &
+\reff{11.1} \\\hline
+
+{\small SELFDESTRUCT} &
+!!! &
+\reff{6.1(), 9.4.2(), 9.4.4()} \\\hline
+
+{\small SSTORE} &
+!!! &
+\reff{6.1, 9.4.2()} \\\hline
+
+{\small STOP} &
+!!! &
+\reff{6.1, 9.4.1, 9.4.4} \\\hline
+
+{\small SUICIDE} &
+!!! &
+\reff{(6.1, 9.4.4)} \\\hline
+
+% TT
+$\mathbf{T}$ &
+transactions in the given block &
+\reff{4.3.0(4.4.0)} \\\hline
+
+$T, T_{number}$ &
+a transaction &
+\reff{2.0, 4.2(4.3), 6.0, 6.2} \\\hline
+
+$T_{\mathbf{d}}$ &
+data, input data of the message call ($\mathbb{B}$) &
+\reff{4.2(4.3), 6.2} \\\hline
+
+$T_{\mathrm{g}}$ &
+gasLimit, maximum amount of gas used in this transaction ($\mathbb{N}_{256}$) &
+\reff{4.2(4.3), 6.2} \\\hline
+
+$T_{\mathbf{i}}$ &
+init, EVM-code for the account initialisation procedure, executed only once at account creation ($\mathbb{B}$) &
+\reff{4.2(4.3), 6.2} \\\hline
+
+$T_{\mathrm{n}}$ &
+transaction nonce, number of transactions sent by the sender ($\mathbb{N}_{256}$) &
+\reff{3, 4.2(4.3)} \\\hline
+
+$T_{\mathrm{o}}$ &
+original transactor, which can differ from the sender ($S(T)$) &
+\reff{6.2} \\\hline
+
+$T_{\mathrm{p}}$ &
+gasPrice, number of Wei to be paid per unit of gas ($\mathbb{N}_{256}$) &
+\reff{4.2(4.3), 6.2} \\\hline
+
+$T_{\mathrm{r}}$ &
+one of transaction signature values ($\mathbb{N}_{256}$) &
+\reff{4.2(4.3)} \\\hline
+
+$T_{\mathrm{s}}$ &
+one of transaction signature values ($\mathbb{N}_{256}$) &
+\reff{4.2(4.3)} \\\hline
+
+$T_{\mathrm{t}}$ &
+to, message call' recipient address ($\mathbb{B}_{20}$) or (contract creation transaction) $\varnothing$ ($\mathbb{B}_0$) &
+\reff{4.2(4.3)} \\\hline
+
+$T_{\mathrm{v}}$ &
+value, number of Wei to be transferred ($\mathbb{N}_{256}$) &
+\reff{4.2(4.3), 6.2} \\\hline
+
+$T_{\mathrm{w}}$ &
+one of transaction signature values ($\mathbb{N}_{5}$) &
+\reff{4.2(4.3)} \\\hline
+
+$\mathbf{t}$ &
+touched accounts ($A_{\mathbf{t}}$) &
+\reff{8(), 9.3()} \\\hline
+
+$\texttt{\small TRIE}()$ &
+!!! &
+\reff{4.1, (4.4.1), 4.3.2(4.4.2), 7, 8, 11.4} \\\hline
+
+$\mathbf{U}$ &
+set of uncle block headers &
+\reff{4.3.0(4.4.0)} \\\hline
+
+$V()$ &
+block header validity function &
+\reff{4.3.4(4.4.4), 11.1} \\\hline
+
+$v()$ &
+account validity function &
+\reff{4.1} \\\hline
+
+$v$ &
+(contract creation) endowment or (message call) value &
+\reff{7, 8} \\\hline
+
+$\tilde{v}$ &
+value to be transferred for the {\small DELEGATECALL} instruction &
+\reff{8} \\\hline
+
+$v'$ &
+account's pre-existing value &
+\reff{\textbf{7}} \\\hline
+
+$v_0$ &
+up-front cost &
+\reff{6.2} \\\hline
+
+$W$ &
+!!! &
+\reff{9.4.2()} \\\hline
+
+$w$ &
+!!! &
+\reff{7(), 8(), 9.4.0(), 9.4.1, 9.4.2, 9.5} \\\hline
+
+$X()$ &
+!!! &
+\reff{9.4.0} \\\hline
+
+$X_{\mathrm{0,1,2,4}}()$ &
+!!! &
+\reff{(9.4.0)} \\\hline
+
+$x$ &
+difficulty adjustment factor &
+\reff{\textbf{4.3.4}(4.4.4), 11.4} \\\hline
+
+$Z()$ &
+function which check an exceptional halting state of the machine (cf. $H()$) &
+\reff{9.4.0, 9.4.1, 9.4.2} \\\hline
+
+$z$ &
+status code !!! &
+\reff{6.2(), 7(), 8()} \\\hline
+
+\end{longtabu}
+
+%\end{multicols}
+
+\end{document}
